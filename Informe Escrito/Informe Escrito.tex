@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage{fourier}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{LauraMartirBeltranC113}
+\begin{document}
+
+\begin{Huge}
+
+\begin{center}
+
+\textbf{Havana Univerisity Language for Kompilers} (H.U.L.K.)\\\\
+
+\textbf{Informe Escrito}
+
+\end{center}
+
+\begin{center}
+Grupo: C-111\\
+Facultad: MATCOM \\
+Universidad de La Habana\\
+Estudiante: Laura Mártir Beltrán
+\end{center}
+
+\end{Huge}
+
+\begin{LARGE}
+
+\begin{center}
+\textbf{¿Qué es un intérprete de lenguaje de programación?}
+
+\end{center}
+
+\begin{flushleft}
+Es un programa informático capaz de analizar y ejecutar otros programas. Los intérpretes solo traducen del lenguaje de programación al código de máquina, a medida que sea necesario, instrucción por instrucción y normalmente sin guardar el resultado de dicha traducción.\\
+Los programas interpretados suelen ser mas lentos que los compilados debido a la necesidad de traducir el programa mientras se ejecuta, pero a cambio son más flexibles como entornos de programación y depuración ,y permiten ofrecer al programa interpretado un entorno no dependiente de la máquina donde se ejecuta el intérprete, pero si dependiente del propio intérprete.
+\end{flushleft}
+
+\begin{flushleft}
+Este, está estructurado por tres procesos:\\
+
+$\bullet$ Análisis Léxico (lexer).\\
+$\bullet$ Análisis Sintáctico (parser).\\
+$\bullet$ Análisis Semántico.
+
+\end{flushleft}
+
+\end{LARGE}
+
+\newpage{
+
+\begin{LARGE}
+
+\begin{center}
+
+\textbf{Análisis Léxico} (lexer):
+
+\end{center}
+
+\begin{flushleft}
+
+Dada una entrada no vacía, lo primero que debe hacer nuestro intérprete es desglosar todos los tokens válidos (si los hay, y en caso de alguno no ser válido, se devuelve un error) que pertenecen a esta, deshaciéndose de todos los espacios en blanco.
+
+\end{flushleft}
+
+\begin{center}
+
+\textbf{Análisis Sintáctico} (parser):
+
+\end{center}
+
+\begin{flushleft}
+
+Dado un conjunto de reglas que definen las combinaciones de símbolos considerados declaraciones o expresiones correctamente estructuradas en el lenguaje H.U.L.K., se comenzará a analizar la sintaxis de la entrada ya tokenizada. En caso de no cumplir todas las reglas sintácticas de H.U.L.K., se devolverá un error. 
+
+\end{flushleft}
+
+\begin{center}
+
+\textbf{Análisis Semántico}
+
+\end{center}
+
+\begin{flushleft}
+
+De la misma forma que ocurre en el análisis sintáctico, H.U.L.K. posee un conjunto de reglas semánticas las cuales se deben cumplir en la asignacion de valores y operaciones de la entrada para devolver una salida correctamente traducida, de otra manera, se devolverá un error. 
+
+\end{flushleft}
+
+\end{LARGE}
+
+}
+
+\end{document}
