@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 public static class Semantic
 {
     //Esta lista va a contener a todas las variables que encontremos en nuestro procesamiento
@@ -195,7 +197,7 @@ public static class Semantic
         {
             //Principalmente buscar operaciones binarias en orden de prioridad
             int parentheses_count = 0;
-
+            int last_sign=-1;
             //Este for da importancia a los & |
             for (int i = 0; i < Expression.Count; i++)
             {
@@ -209,9 +211,15 @@ public static class Semantic
                 }
                 if ((Expression[i] == Token.AND && parentheses_count == 0) || (Expression[i] == Token.OR && parentheses_count == 0))
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
+                }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
                 }
             }
+
+            last_sign=-1;
             //Este for le da importancia a los == != < <= > >=
             for (int i = 0; i < Expression.Count; i++)
             {
@@ -225,11 +233,16 @@ public static class Semantic
                 }
                 if ((Expression[i] == Token.EQUIVALENT && parentheses_count == 0) || (Expression[i] == Token.DIFFERENT && parentheses_count == 0) || (Expression[i] == Token.MINOR_E && parentheses_count == 0) || (Expression[i] == Token.MINOR && parentheses_count == 0) || (Expression[i] == Token.MAJOR && parentheses_count == 0) || (Expression[i] == Token.MAJOR_E && parentheses_count == 0))
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
+                }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
                 }
             }
 
             //Este for le da importancia a suma y resta
+            last_sign=-1;
             for (int i = 0; i < Expression.Count; i++)
             {
                 if (Expression[i] == "(")
@@ -242,11 +255,17 @@ public static class Semantic
                 }
                 if ((Expression[i] == Token.ADD && parentheses_count == 0) || (Expression[i] == Token.SUBSTRACT && parentheses_count == 0))
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
                 }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
+                }
+                
             }
 
             //Este for le da importancia a * / %
+            last_sign=-1;
             for (int i = 0; i < Expression.Count; i++)
             {
                 if (Expression[i] == "(")
@@ -259,11 +278,16 @@ public static class Semantic
                 }
                 if ((Expression[i] == Token.MULTIPLY && parentheses_count == 0) || (Expression[i] == Token.SPLIT && parentheses_count == 0) || (Expression[i] == Token.REST && parentheses_count == 0))
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
+                }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
                 }
             }
 
             //Este for le da importancia a ^
+            last_sign=-1;
             for (int i = 0; i < Expression.Count; i++)
             {
                 if (Expression[i] == "(")
@@ -276,11 +300,16 @@ public static class Semantic
                 }
                 if (Expression[i] == Token.EXPONENTIAL && parentheses_count == 0) //^
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
+                }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
                 }
             }
 
             //Este for le da importancia a @
+            last_sign=-1;
             for (int i = 0; i < Expression.Count; i++)
             {
                 if (Expression[i] == "(")
@@ -293,7 +322,11 @@ public static class Semantic
                 }
                 if (Expression[i] == Token.CONCAT && parentheses_count == 0) //@
                 {
-                    return Solve_Binary(Expression, Expr_Tokens, Expression[i], i);
+                    last_sign=i;
+                }
+                if(i==Expression.Count-1&&last_sign!=-1)
+                {
+                    return Solve_Binary(Expression, Expr_Tokens, Expression[last_sign], last_sign);
                 }
             }
 
@@ -688,7 +721,7 @@ public static class Semantic
             }
             if (Operation == Token.EXPONENTIAL)
             {
-                return (Math.Pow(double.Parse(left), double.Parse(right)).ToString());
+                return Math.Pow(double.Parse(left), double.Parse(right)).ToString();
             }
         }
 
